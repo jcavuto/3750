@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Javascript Events</title>
+    <style>
+        #redBtn{
+            color: white;
+            background-color: red;
+            display: inline-block;
+        }
+        #red{
+            display: inline-block;
+            width: 33%;
+            text-align: center;
+        }
+        #blueBtn{
+            color: white;
+            background-color: blue;
+            display: inline-block;
+        }
+        #blue{
+            display: inline-block;
+            width: 33%;
+            text-align: center;
+        }
+        #greenBtn{
+            color: white;
+            background-color: green;
+            display: inline-block;
+        }
+        #green{
+            display: inline-block;
+            width: 33%;
+            text-align: center;
+        }
+        .count{
+            position: relative;
+            display: inline-block;
+            background-color: black;
+            color: white;
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+  </head>
+  <nav>
+    <ul>
+        <li><a class="home" href="../index.html">Home</a></li>
+        <li><a href="../Ellie.html">Ellie</a></li>
+        <li> <a href="../AboutMe.html">About Me</a></li>
+    </ul>
+</nav>
+  <body>
+    <h1 style="text-align: center; width: 100%">Javascript Events</h1>
+    <div id="red">
+        <button id="redBtn">Change Color</button>
+        <div class="count">
+            <p>Red Count: </p>
+            <p id = "redCount">0</p>
+        </div>
+    </div>
+    <div id="blue">
+        <button id="blueBtn">Change Color</button>
+        <div class="count">
+            <p>Blue Count: </p>
+            <p id = "blueCount">0</p>
+        </div>
+    </div>
+    <div id="green">
+        <button id="greenBtn">Change Color</button>
+        <div class="count">
+            <p>green Count: </p>
+            <p id = "greenCount">0</p>
+        </div>
+    </div>
+
+    <script>
+        var redBtnCount = 0;
+        function redButton(){
+            document.body.style.backgroundColor = "red";
+            redBtnCount++;
+            document.getElementById('redCount').innerHTML = redBtnCount;
+        }
+        function redButtonHov(){
+            document.getElementById('redBtn').style.backgroundColor = "white";
+            document.getElementById('redBtn').style.color = "red";
+        }
+        function redButtonUnhov(){
+            document.getElementById('redBtn').style.backgroundColor = "red";
+            document.getElementById('redBtn').style.color = "white";
+        }
+
+        document.getElementById('redBtn').addEventListener('click', redButton);
+        document.getElementById('redBtn').addEventListener('mouseover', redButtonHov);
+        document.getElementById('redBtn').addEventListener('mouseout', redButtonUnhov);
+
+        var blueBtnCount = 0;
+        function blueButton(){
+            document.body.style.backgroundColor = "blue";
+            blueBtnCount++;
+            document.getElementById('blueCount').innerHTML = blueBtnCount;
+        }
+        function blueButtonHov(){
+            document.getElementById('blueBtn').style.backgroundColor = "white";
+            document.getElementById('blueBtn').style.color = "blue";
+        }
+        function blueButtonUnhov(){
+            document.getElementById('blueBtn').style.backgroundColor = "blue";
+            document.getElementById('blueBtn').style.color = "white";
+        }
+
+        document.getElementById('blueBtn').addEventListener('click', blueButton);
+        document.getElementById('blueBtn').addEventListener('mouseover', blueButtonHov);
+        document.getElementById('blueBtn').addEventListener('mouseout', blueButtonUnhov);
+
+        var greenBtnCount = 0;
+        function greenButton(){
+            document.body.style.backgroundColor = "green";
+            greenBtnCount++;
+            document.getElementById('greenCount').innerHTML = greenBtnCount;
+        }
+        function greenButtonHov(){
+            document.getElementById('greenBtn').style.backgroundColor = "white";
+            document.getElementById('greenBtn').style.color = "green";
+        }
+        function greenButtonUnhov(){
+            document.getElementById('greenBtn').style.backgroundColor = "green";
+            document.getElementById('greenBtn').style.color = "white";
+        }
+
+        document.getElementById('greenBtn').addEventListener('click', greenButton);
+        document.getElementById('greenBtn').addEventListener('mouseover', greenButtonHov);
+        document.getElementById('greenBtn').addEventListener('mouseout', greenButtonUnhov);
+    </script>
+</html>
