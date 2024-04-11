@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Array Sorting Example</title>
+    <link rel="stylesheet" href="sort.css">
+  </head>
+  <nav>
+    <ul>
+        <li><a class="home" href="../index.html">Home</a></li>
+        <li><a href="../Ellie.html">Ellie</a></li>
+        <li> <a href="../AboutMe.html">About Me</a></li>
+    </ul>
+    </nav>
+  <body>
+     <h1>Sorting String Arrays</h1>
+     <p>Enter two or more names in the field below,
+     and the sorted list of names will appear in the
+     textarea.</p>
+     <form name="theform">
+     Name:
+     <input type="text" id="newname" name="newname" size="20">
+     <input type="button" name="addname" value="Add"
+     onclick="SortNames();">
+     <br/>
+     <h2>Sorted Names</h2>
+     <textarea cols="60" rows="10" name="sorted">
+     The sorted names will appear here.
+     </textarea>
+     </form>
+  </body>
+  <script type="text/javascript" src="sort.js"></script>
+</html>
