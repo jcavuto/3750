@@ -1,0 +1,62 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 110%;
+}
+html{
+    background-color: #abcdef;
+}
+#pause{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 25%;
+    text-align: center;
+}
+.jumbotron {
+    height: 25%;
+    position: absolute;
+    top: 0%;
+    left:0%;
+    width: 100%;
+    background-color: #abcdef; /* Choose your desired color */
+}
+
+.buttonArea {
+    height: 75%;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    background-color: black;
+}
+
+.mynav{
+    display: block;
+    background-color: #333;
+    position: absolute;
+    top: 0px;
+    left: 25%;
+    width: 50%;
+    text-align: center;
+}
+.mynav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+.mynav li{
+    float:left;
+}
+
+.mynav a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.mynav a:hover{
+    background-color: #111;
+}
