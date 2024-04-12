@@ -1,0 +1,83 @@
+body, html {
+    height: 100%; /* Set the height of the body and html elements to 100% to fill the entire viewport */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+body{
+    background-color: lightblue;
+}
+#formarea{
+    text-align: center;
+    background-color: #737070;
+    display:block;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+form{
+    padding-top: 20%;
+}
+#cardwrapper{
+    text-align: center;
+    background-color: #d2c7c7;
+    display:block;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#buttonwrapper{
+    padding-top: 2%;
+    width: 100%;
+    height: 5%;
+}
+
+#buttonwrapper button{
+    width: 100%;
+    background-color: lightcoral;
+    height: 100%;
+}
+
+#clearform{
+    background-color: black;
+    color: white;
+}
+
+#clearButtonWrapper{
+    padding-top: 1%;
+}
+
+body{
+    background-color: #d3d3d3;
+}
+
+nav{
+    text-align: center;
+    display: block;
+    background-color: #333;
+    border-radius: 10px;
+    margin: auto;
+    width: 700px;
+    margin-top: 25px;
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+nav li{
+    float:left;
+}
+
+nav a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav a:hover, .dropdown:hover .dropbtn{
+    background-color: #111;
+}
