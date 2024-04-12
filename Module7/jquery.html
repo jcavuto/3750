@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            nav{
+            text-align: center;
+            display: block;
+            background-color: #333;
+            border-radius: 10px;
+            margin: auto;
+            width: 700px;
+            margin-top: 25px;
+            }
+            nav ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                display: inline-block;
+            }
+            nav li{
+                float:left;
+            }
+
+            nav a{
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            nav a:hover, .dropdown:hover .dropbtn{
+                background-color: #111;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href= "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css">
+
+        <script>
+            $(document).ready(function(){
+
+                //When mouse over a div, it becomes yellow
+                $("div.highlightdiv").mouseover(function(){
+                    $(this).css("background-color", "yellow");
+                });
+
+                //When mouse leaves div, turns back to white
+                $("div").mouseout(function(){
+                    $(this).css("background-color", "white");
+                });
+
+                //Fade Div1
+                $("#fDiv1").click(function(){
+                    $("#div1").fadeOut({
+                        duration: 20000,
+                        progress: function(animation, progress) {
+                            $("#progressbar1").progressbar({
+                                value: progress * 100
+                            });
+                        }
+                    });
+                });
+
+                //Fade Div2
+                $("#fDiv2").click(function(){
+                    $("#div2").fadeOut({
+                        duration: 20000,
+                        progress: function(animation, progress) {
+                            $("#progressbar2").progressbar({
+                                value: progress * 100
+                            });
+                        }
+                    });
+                });
+
+                //Fade Div3
+                $("#fDiv3").click(function(){
+                    $("#div3").fadeOut({
+                        duration: 20000,
+                        progress: function(animation, progress) {
+                            $("#progressbar3").progressbar({
+                                value: progress * 100
+                            });
+                        }
+                    });
+                });
+
+                //Date Picker
+                $(function () {
+                    $("#my_date_picker").datepicker({
+                        onSelect: function(dateText) {
+                            $("#datepicked").text("Date Picked: " + dateText);
+                        }
+                    }
+                    );
+                });
+
+                //Accordion
+                $( function() {
+                    $( "#accordion" ).accordion();
+                } );
+
+            });
+        </script>
+    </head>
+    <nav>
+        <ul>
+            <li><a class="home" href="../../index.html">Home</a></li>
+            <li><a href=".././Ellie.html">Ellie</a></li>
+            <li> <a href="../../AboutMe.html">About Me</a></li>
+        </ul>
+    </nav>
+    <body>
+
+        <h1>Welcome to My Homepage</h1>
+
+        <p>This is a paragraph.</p>
+
+        <div id="div1" class="highlightdiv" style="border: 1px solid black;">
+            <p>A paragraph in a div.</p>
+            <p>Another paragraph in a div.</p>
+        </div>
+
+        <br>
+
+        <div id="div2" class="highlightdiv" style="border: 1px solid black;">
+            <p>A paragraph in another div.</p>
+            <p>Another paragraph in another div.</p>
+        </div>
+
+        <br>
+
+        <div id="div3" class="highlightdiv" style="border: 1px solid black;">
+            <p>A paragraph in another div.</p>
+            <p>Another paragraph in another div.</p>
+        </div>
+
+        <hr><br>
+        <div id="accordion">
+            <h1>Want to fade the first Div?</h1>
+            <button id="fDiv1">Fade div1</button>
+            <h1>Want to fade the second Div?</h1>
+            <button id="fDiv2">Fade div2</button>
+            <h1>Want to fade the third Div?</h1>
+            <button id="fDiv3">Fade div3</button>
+        </div>
+
+        <hr><br>
+        Date: <input type="text" id="my_date_picker">
+        <br>
+        <p id="datepicked">Date Picked: </p>
+        <br>
+        <hr>
+        Fade Div1's Progress: <div id="progressbar1"></div>
+        <hr>
+        Fade Div2's Progress: <div id="progressbar2"></div>
+        <hr>
+        Fade Div3's Progress: <div id="progressbar3"></div>
+
+
+    </body>
+</html>
