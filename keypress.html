@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Displaying Keypresses</title>
+    <style>
+        nav{
+            text-align: center;
+            display: block;
+            background-color: #333;
+            border-radius: 10px;
+            margin: auto;
+            width: 700px;
+            margin-top: 25px;
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: inline-block;
+        }
+        nav li{
+            float:left;
+        }
+
+        nav a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover, .dropdown:hover .dropbtn{
+            background-color: #111;
+        }
+
+    </style>
+    <script type="text/javascript">
+    function displayKey(e) {
+       // which key was pressed?
+       if (e.keyCode) {
+          var keycode=e.keyCode;
+       }  else {
+          var keycode=e.which;
+       }
+       character=String.fromCharCode(keycode);
+
+       // find the object for the destination paragraph
+       var keysParagraph = document.getElementById('keys');
+       if(character == 'a' || character == 'e' || character == 'i' || character == 'o' || character == 'u' ){
+            character = character.toUpperCase();
+        }
+        if(character == 'r' || character == 'R'){
+            document.getElementById("bodyarea").style.backgroundColor = "red";
+            document.getElementById("bodyarea").style.color = "white";
+        }
+        if(character == 'g' || character == 'G'){
+            document.getElementById("bodyarea").style.backgroundColor = "green";
+            document.getElementById("bodyarea").style.color = "white";
+        }
+        if(character == 'b' || character == 'B'){
+            document.getElementById("bodyarea").style.backgroundColor = "blue";
+            document.getElementById("bodyarea").style.color = "white";
+        }
+       // add the character to the paragraph
+       keysParagraph.innerHTML += character;
+    }
+    </script>
+  </head>
+  <nav>
+    <ul>
+        <li><a class="home" href="../../index.html">Home</a></li>
+        <li><a href=".././Ellie.html">Ellie</a></li>
+        <li> <a href="../../AboutMe.html">About Me</a></li>
+    </ul>
+</nav>
+  <body id="bodyarea" onkeypress="displayKey(event)">
+    <h1>Displaying Typed Characters</h1>
+    <p>This document includes a simple script that displays
+    the keys you type as a new paragraph below. Type a few keys
+    to try it. </p>
+    <div id="keys"></div>
+  </body>
+</html>
