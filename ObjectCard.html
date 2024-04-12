@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>JavaScript Business Cards</title>
+    <link rel="stylesheet" href="ObjectCard.css">
+  </head>
+  <body>
+    <div id="formarea">
+        <nav>
+            <ul>
+                <li><a class="home" href="../index.html">Home</a></li>
+                <li><a href="../Ellie.html">Ellie</a></li>
+                <li> <a href="../AboutMe.html">About Me</a></li>
+            </ul>
+        </nav>
+        <form id="inputform">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+
+            <label for="phone">Phone:</label>
+            <input type="phone" id="phone" name="phone" required><br><br>
+
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" required><br><br>
+        </form>
+        <button id="submit">Submit</button>
+        <br>
+        <br>
+        <button id="clearform">Clear Form</button>
+    </div>
+    <div id="cardwrapper">
+        <div id="buttonwrapper">
+            <button id="print">Print Cards</button>
+        </div>
+        <div id="cardarea">
+
+        </div>
+        <div id="clearButtonWrapper">
+            <button id="clearcards">Clear All Cards</button>
+        </div>
+    </div>
+
+    <br>
+
+    <script type="text/javascript" src="cards.js" > </script>
+</body>
+</html>
+
