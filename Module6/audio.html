@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Week 6 Group: Audio</title>
+        <style>
+            body,html{
+                width: 100%;
+                height: 100%;
+                background-color: lightblue;
+            }
+            h1{
+                background-color: maroon;
+                width: 100%;
+                height: 10%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                margin:0;
+                text-align: center;
+            }
+            #duration{
+                display: block;
+                background-color:black;
+                color: white;
+                width: 15%;
+                height: 5%;
+                position: absolute;
+                right:0%;
+                top: 10%;
+                margin: 0;
+            }
+            #currentTime{
+                display: block;
+                background-color:black;
+                color: white;
+                width: 15%;
+                height: 5%;
+                position: absolute;
+                left:0%;
+                top: 10%;
+                margin: 0;
+            }
+            #Play{
+                width: 10%;
+                height: 15%;
+                position:absolute;
+                top: 10%;
+                left: 45%;
+            }
+            #volUp{
+                width: 10%;
+                height: 10%;
+                position: absolute;
+                top:30%;
+                left:34%;
+            }
+            #volDown{
+                width: 10%;
+                height: 10%;
+                position: absolute;
+                top: 30%;
+                left: 56%;
+            }
+            #mute{
+                width:10%;
+                height: 10%;
+                position: absolute;
+                top:30%;
+                left:45%;
+            }
+            #curVol{
+                width: 10%;
+                background-color: linen;
+                height:5%;
+                position: absolute;
+                top: 43%;
+                left: 45%;
+                text-align: center;
+            }
+            #getDuration{
+                position: absolute;
+                width: 5%;
+                height: 5%;
+                top: 10%;
+                right: 15%;
+            }
+            #getCurrentTime{
+                position: absolute;
+                width: 10%;
+                height:5%;
+                top: 10%;
+                left: 15%;
+            }
+            #skipwrapper{
+                width: 15%;
+                height: 15%;
+                position: absolute;
+                left: 0%;
+                top: 15%;
+
+            }
+            #minutes, #seconds{
+                display: block;
+                background-color:linen;
+                color: black;
+                width: 100%;
+                height: 25%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <audio id="ATWTMV">
+            <source src="All-Too-Well-10-Minute-Version-T.mp3" type="audio/mpeg">
+        </audio>
+        <h1>
+            ALL TOO WELL (10 Minute Version) (TAYLOR'S VERSION) (FROM THE VAULT)
+        </h1>
+        <br>
+        <p id="duration">Duration: </p>
+        <br>
+        <p id="currentTime">Current Time: </p>
+        <br>
+        <img src="Play.png" id="Play" onclick="myPlay()">
+        <br>
+        <img src="VolUp.png" id="volUp" onclick="volUp()">
+        <img src="VolDown.png" id="volDown" onclick="volDown()">
+        <img src="Mute.png" id="mute" onclick="muteToggle()">
+        <br>
+        <p id="curVol"></p>
+        <br>
+        <br>
+        <button id="getDuration" onclick="GetDurationFunction()">Get Duration</button>
+        <br>
+        <button id="getCurrentTime" onclick="GetCurrentTimeFunction()">Get Current Time</button>
+
+        <br>
+        <br>
+
+        <div id="skipwrapper">
+            <p>Skip to:</p>
+            <label for="minutes">Minutes: </label>
+            <input id="minutes">
+            <br>
+            <label for="seconds">Seconds: </label>
+            <input id="seconds">
+            <br>
+            <button id="skip" onclick="skipTo()">Skip</button>
+        </div>
+
+        <br>
+
+    </body>
+
+    <script>
+        var song = document.getElementById("ATWTMV");
+        var playpause = document.getElementById("Play");
+        var currentVolumeDisplay = document.getElementById("curVol");
+        var playToggle = 0;
+        var curTimeInterval;
+        var muteOn = 0;
+        var muteLast = 0;
+
+        song.volume = 0.5;
+        displayCurrentVolume();
+
+        function myPlay(){
+            if(playToggle == 0){
+                song.play();
+                playToggle = 1;
+                playpause.src = "Pause.png";
+            }
+            else{
+                song.pause();
+                playToggle = 0;
+                playpause.src = "Play.png";
+            }
+        }
+
+        function volUp(){
+            muteOn=0;
+            song.volume += .01;
+            displayCurrentVolume();
+        }
+
+        function volDown(){
+            muteOn = 0;
+            song.volume -= .01;
+            displayCurrentVolume();
+        }
+
+        function muteToggle(){
+            if(muteOn == 0){
+                muteLast = song.volume;
+                song.volume = 0;
+                displayCurrentVolume();
+                muteOn = 1;
+            }
+            else{
+                song.volume = muteLast;
+                displayCurrentVolume();
+                muteOn = 0;
+            }
+
+        }
+
+        function displayCurrentVolume(){
+            currentVolumeDisplay.innerHTML = "Current Volume: " + Math.floor(song.volume * 100);
+        }
+
+        function GetDurationFunction()  {
+            document.getElementById("duration").innerHTML = "Duration: " + Math.floor(song.duration / 60) + " mins and " + Math.floor(song.duration % 60) + " seconds";
+        }
+
+        function GetCurrentTimeFunction(){
+            curTimeInterval = setInterval(displayCurrentTimeFunction, 500);
+        }
+        function displayCurrentTimeFunction() {
+            document.getElementById("currentTime").innerHTML = "Current Time: " + Math.floor(song.currentTime / 60) + " mins and " + Math.floor(song.currentTime % 60) + " seconds";
+        }
+
+        function skipTo(){
+            var minutes = parseInt(document.getElementById("minutes").value);
+            var seconds = parseInt(document.getElementById("seconds").value);
+            var totalseconds = (minutes * 60) + seconds;
+            song.currentTime = totalseconds;
+
+            document.getElementById("minutes").value = "";
+            document.getElementById("seconds").value = "";
+        }
+    </script>
+</html>
