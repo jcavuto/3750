@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet" href="project1.css">
+</head>
+<nav>
+    <ul>
+        <li><a class="home" href="../../index.html">Home</a></li>
+        <li><a href=".././Ellie.html">Ellie</a></li>
+        <li> <a href="../../AboutMe.html">About Me</a></li>
+    </ul>
+</nav>
+<body>
+    <audio id="audioPlayer">
+        <source src="Audio/All-Too-Well-10-Minute-Version-T.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="songtitle">
+        <h1>All Too Well (10 Minute Version)(Taylor's Version)[From the Vault]
+        <br>
+        By: Taylor Swift</h1>
+    </div>
+
+    <div id="sliderWrapper">
+        <div id="slider"></div>
+        <p id="time"></p>
+    </div>
+    <div id="leftsidewrapper">
+        <h1 class="sectionTitle">Titles</h1>
+        <div id="titles">
+        </div>
+
+    </div>
+    <div id="rightsidewrapper">
+        <h1 class="sectionTitle">Controls</h1>
+        <img id="playpause" src="Images/Play.png"></img>
+        <img id="skip5" src="Images/Skip5.png"></img>
+        <img id="rewind5" src="Images/Rewind5.png"></img>
+
+        <div id="inputwrapper">
+            <h3>Add New Title at Current Time Stamp</h3>
+            <p>New Title:&nbsp;</p>
+            <input id="newTitle">
+            <button id="addTitle">Submit</button>
+            <div id="responsemessage"></div>
+        </div>
+    </div>
+
+    <script src="project1.js"></script>
+
+    <!--Script to get the slider-->
+    <script>
+        $(document).ready(function() {
+
+            printTitles();
+
+            var audio = document.getElementById("audioPlayer");
+            var slider = $("#slider");
+
+            audio.onloadedmetadata = function() {
+                slider.slider({
+                    range: "min",
+                    min: 0,
+                    max: audio.duration,
+                    step: 1,
+                    slide: function(event, ui) {
+                        audio.currentTime = ui.value;
+                    }
+                });
+            };
+
+            audio.ontimeupdate = function() {
+                slider.slider("value", audio.currentTime);
+            };
+        });
+    </script>
+</body>
+</html>
