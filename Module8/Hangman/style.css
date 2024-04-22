@@ -1,0 +1,70 @@
+body {
+   font-family: Arial, sans-serif;
+   text-align: center;
+}
+
+#wordToGuess {
+   margin: 20px;
+   font-size: 24px;
+}
+
+#letters button {
+   margin: 5px;
+   padding: 10px;
+   width: 40px;
+}
+
+.hidden {
+   visibility: hidden;
+}
+
+#imageContainer{
+    width: 75px;
+    height: 84px;
+    background-size: 235px 350px;
+    margin: auto;
+}
+
+.letter-grid {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: repeat(6, 1fr);
+   gap: 10px;
+   max-width: 600px;
+   margin: auto;
+}
+
+.letter-row {
+   display: flex;
+   justify-content: space-between;
+}
+nav{
+    text-align: center;
+    display: block;
+    background-color: #333;
+    border-radius: 10px;
+    margin: auto;
+    width: 700px;
+    margin-top: 25px;
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+nav li{
+    float:left;
+}
+
+nav a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+nav a:hover, .dropdown:hover .dropbtn{
+    background-color: #111;
+}
