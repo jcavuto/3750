@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Handlebars</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="home" href="../../index.html">Home</a></li>
+            <li><a href="../../Ellie.html">Ellie</a></li>
+            <li> <a href="../../AboutMe.html">About Me</a></li>
+        </ul>
+    </nav>
+<div class="page-wrap">
+    <h1>Handlebars Tutorial</h1>
+
+    <div id="pets-container"></div>
+</div>
+
+<script id="petsTemplate" type="text/x-handlebars-template">
+    {{#each pets}}
+        <div class="pet">
+            <div class="photo-column">
+                <img src="{{photo}}">
+            </div>
+            <div class="info-column">
+                <h2>{{name}} <span class="species">({{species}})</span></h2>
+
+                <p>Age: {{calculateAge birthYear}}</p>
+
+                {{#if favFoods}}
+                <h4 class="headline-bar">Favorite Foods</h4>
+                <ul class="favorite-foods">
+                    {{#each favFoods}}
+                        <li>{{{this}}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+
+            </div>
+        </div>
+    {{/each}}
+</script>
+
+<script src="js/handlebars.min-v4.7.8.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
