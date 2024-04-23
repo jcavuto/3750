@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title>Zip Code Distance Calculator</title>
+    </head>
+    <nav>
+        <ul>
+            <li><a class="home" href="../../index.html">Home</a></li>
+            <li><a href=".././Ellie.html">Ellie</a></li>
+            <li> <a href="../../AboutMe.html">About Me</a></li>
+        </ul>
+    </nav>
+    <body>
+        <header>Zip Code Distance Calculator</header>
+        <div id='input-wrapper'>
+            <input type="text" placeholder="Zip Code 1" id="zip1" maxlength="5">
+            <input type="text" placeholder="Zip Code 2" id="zip2" maxlength="5">
+            <button id="zip-submit-btn">Submit</button>
+        </div>
+        <div id="distance" class="myhide">Distance: </div>
+        <div id="error" class="myhide">Error:</div>
+    </body>
+
+    <script id='output-template' type="text/x-handlebars-template">
+        <h1> Distance Between {{Zips.[0].Number}} and {{Zips.[1].Number}} </h1>
+        {{#each Zips}}
+            <p>{{Number}}<span>({{Longitude}}, {{Latitude}})</span></p>
+        {{/each}}
+        <p>Distance: approximately {{Distance}} miles.</p>
+    </script>
+
+    <script src="handlebars.min-v4.7.8.js"></script>
+    <script src="main.js"></script>
+</html>
