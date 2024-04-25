@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../styles.css">
+        <title>Browse Cards</title>
+    </head>
+    <body>
+        <img src="../Pokeball.png" id='logo'>
+        <div class="header">
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="Browse.html">Browse</a></li>
+                    <li><a href="../Search/Search.html">Search</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div id='filterAreaBrowse'>
+            <div id="browse-input-number">
+                <label for="dropdownInput">Cards per page</label>
+                <select id='dropdownInput'>
+                    <option value ="10">10</option>
+                    <option value ="25">25</option>
+                    <option value = "50">50</option>
+                    <option value = "100">100</option>
+                </select>
+                <button id='submitNumber'>Submit</button>
+            </div>
+            <div id='filterselect'>
+                <label for="filterinput">Filter: </label>
+                <select id="filterinput">
+                    <option value="orderBy=name">Name: A to Z</option>
+                    <option value="orderBy=-name">Name: Z to A</option>
+                    <option value="orderBy=supertype">SuperType: A to Z</option>
+                    <option value="orderBy=-supertype">SuperType: Z to A</option>
+                    <option value="q=supertype:Pokémon&orderBy=name">Only Pokémon: A to Z</option>
+                    <option value="q=supertype:Pokémon&orderBy=-name">Only Pokémon: Z to A</option>
+                    <option value="q=supertype:Trainer&orderBy=name">Only Trainers: A to Z</option>
+                    <option value="q=supertype:Trainer&orderBy=-name">Only Trainers: Z to A</option>
+                    <option value="q=supertype:Energy&orderBy=name">Only Energy: A to Z</option>
+                    <option value="q=supertype:Energy&orderBy=-name">Only Energy: Z to A</option>
+                </select>
+            </div>
+            <div id='resultswrapper'>
+                <div id='numresults'>
+                </div>
+
+                <div id='pages'>
+                </div>
+            </div>
+            <div id='pageButtonWrapper'>
+                <button id='lastPage' class="myhide">Last Page</button>
+                <button id='nextPage'>Next Page</button>
+            </div>
+            
+        </div>
+        <div id='cardAreaBrowse'>
+
+        </div>
+
+        <div id='cardInfoArea' class="myhide">
+        </div>
+    </body>
+
+    <script id="cardTemplate" type="text/x-handlebars-template">
+        <div class="pokecard">
+            <div class="pokecard-info">
+                <h1>Name: {{name}}</h1>
+                <h2>SuperType: {{supertype}}</h2>
+
+                {{#if hp}}
+                    <h3>Hp: {{hp}}</h3>
+                {{/if}}
+
+                {{#if tcgplayer.prices.normal.market}}
+                    <h3>Normal Price: ${{decimalFunction tcgplayer.prices.normal.market}}</h3>
+                {{/if}}
+
+                {{#if tcgplayer.prices.holofoil.market}}
+                    <h3>Holofoil Price: ${{decimalFunction tcgplayer.prices.holofoil.market}}</h3>
+                {{/if}}
+
+                {{#if tcgplayer.prices.reverseHolofoil.market}}
+                    <h3>Reverse-Holofoil Price: ${{decimalFunction tcgplayer.prices.reverseHolofoil.market}}</h3>
+                {{/if}}
+
+                {{#if types}}
+                    <h3>Types:</h3>
+                    <ul>
+                        {{#each types}}<li>{{this}}</li>{{/each}}
+                    </ul>
+                {{/if}}
+
+                {{#if subtypes}}
+                    <h3>Subtypes:</h3>
+                    <ul>
+                        {{#each subtypes}}<li>{{this}}</li>{{/each}}
+                    </ul>
+                {{/if}}
+
+                <a href="{{images.large}}"><img src="{{images.small}}" alt:"No Image Found for {{name}}"></a>
+                <br>
+                <button id={{id}} onclick="showMoreInfo(event)">More Info</button>
+            </div>
+        </div>
+    </script>
+
+    <script id="infoTemplate" type="text/x-handlebars-template">
+        <button onclick="goBackSearch()">Go Back</button>
+        <h1>{{name}}</h1>
+        <br>
+        <img src={{images.small}} alt="No Image Found">
+        <br>
+        <h2><strong>ID:</strong> {{id}}</h2>
+        <h2><strong>Supertype:</strong> {{supertype}}</h2>
+
+        {{#if types}}
+            <h2><strong>Energy Types:</strong></h2>
+            {{#each types}}
+                <p>{{this}}</p>
+            {{/each}}
+        {{/if}}
+
+        {{#if subtypes}}
+            <h2><strong>Subtypes:</strong></h2>
+            {{#each subtypes}}
+                <p>{{this}}</p>
+            {{/each}}
+        {{/if}}
+
+        {{#if level}}
+            <h2><strong>Level:</strong> {{level}}</h2>
+        {{/if}}
+
+        {{#if hp}}
+            <h2><strong>HP:</strong> {{hp}}</h2>
+        {{/if}}
+
+        {{#if evolvesFrom}}
+            <h2><strong>Evolves From:</strong> {{evolvesFrom}}</h2>
+        {{/if}}
+
+        {{#if evolvesTo}}
+            <h2><strong>Evolves To:</strong></h2>
+                {{#each evolvesTo}}
+                    <p>{{this}}</p>
+                {{/each}}
+        {{/if}}
+
+        {{#if rules}}
+            <h2><strong>Rules:</strong></h2>
+            <ul>
+                {{#each rules}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        {{#if ancientTrait}}
+            <h2><strong>Ancient Traits:</strong></h2>
+            {{#each acientTrait}}
+                <h2>{{this.name}}: {{this.text}}</h2>
+            {{/each}}
+        {{/if}}
+
+        {{#if abilities}}
+            <h2><strong>Abilities: </strong></h2>
+            {{#each abilities}}
+                <p>Name: {{this.name}}</p>
+                <p>Type: {{this.type}}</p>
+                <p>Description: {{this.text}}</p>
+                <br>
+            {{/each}}
+        {{/if}}
+
+        {{#if attacks}}
+            <h2><strong>Attacks</strong></h2>
+            {{#each attacks}}
+                <p>Attack Name: {{this.name}}:</p>
+                <p>Description: {{this.text}}</p>
+                <p>Damage: {{this.damage}}</p>
+                <p>Cost: {{this.convertedEnergyCost}}</p>
+                <br>
+            {{/each}}
+        {{/if}}
+
+        {{#if weaknesses}}
+            <h2><strong>Weaknesses</strong></h2>
+            {{#each weaknesses}}
+                <p>Type: {{this.type}}</p>
+                <p>Value: {{this.value}}</p>
+                <br>
+            {{/each}}
+        {{/if}}
+
+        {{#if resistances}}
+            <h2><strong>Resistances</strong></h2>
+            {{#each resistances}}
+                <p>Type: {{this.type}}</p>
+                <p>Value: {{this.value}}</p>
+                <br>
+            {{/each}}
+        {{/if}}
+
+        {{#if retreatCost}}
+            <h2><strong>Retreat Costs</strong></h2>
+            {{#each retreatCost}}
+                <p>{{this}}<p>
+            {{/each}}
+            <br>
+            <p>Converted Retreat Cost: {{convertedRetreatCost}}</p>
+        {{/if}}
+
+        {{#if set}}
+            <h2><strong>Set Name:</strong> {{set.name}}</h2>
+        {{/if}}
+
+        {{#if number}}
+            <h2><strong>Card Number:</strong> {{number}}</h2>
+        {{/if}}
+
+        {{#if artist}}
+            <h2><strong>Artist:</strong> {{artist}}</h2>
+        {{/if}}
+
+        {{#if rarity}}
+            <h2><strong>Rarity:</strong> {{rarity}}</h2>
+        {{/if}}
+
+        {{#if flavorText}}
+            <h2><strong>Flavor Text:</strong> {{flavorText}}
+        {{/if}}
+
+        {{#if nationalPokedexNumbers}}
+            <h2><strong>National Pokedex Numbers:</strong></h2>
+            {{#each nationalPokedexNumbers}}
+                <p>{{this}}</p>
+                <br>
+            {{/each}}
+        {{/if}}
+
+        {{#if legalities}}
+            <h2><strong>Legality Rulings</strong></h2>
+
+            {{#if legalities.standard}}
+                <p>Standard: {{legalities.standard}}</p>
+            {{/if}}
+
+            {{#if legalities.expanded}}
+                <p>Expanded: {{legalities.expanded}}</p>
+            {{/if}}
+
+            {{#if legalities.unlimited}}
+                <p>Unlimited: {{legalities.unlimited}}</p>
+            {{/if}}
+        {{/if}}
+
+        {{#if regulationMark}}
+            <h2><strong>Regulation Mark: </strong> {{regulationMark}}</h2>
+        {{/if}}
+
+        {{#if images}}
+            <h2><strong>Images:</strong></h2>
+
+            {{#if images.small}}
+                <a href="{{images.small}}">Small Image</a>
+            {{/if}}
+            <br>
+            {{#if images.large}}
+                <a href="{{images.large}}">Large Image</a>
+            {{/if}}
+        {{/if}}
+
+        {{#if tcgplayer}}
+            <h2>TCGPlayer Info</h2>
+            <p>URL: <a href={{tcgplayer.url}}>Here</a></p>
+            <p>Last Updated: {{tcgplayer.updatedAt}}</p>
+            <br>
+
+            {{#if tcgplayer.prices.normal}}
+                <p>Normal Prices:</p>
+                <ul>
+                    {{#if tcgplayer.prices.normal.low}}
+                        <li>Low: ${{decimalFunction tcgplayer.prices.normal.low}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.normal.mid}}
+                        <li>Mid: ${{decimalFunction tcgplayer.prices.normal.mid}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.normal.high}}
+                        <li>High: ${{decimalFunction tcgplayer.prices.normal.high}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.normal.market}}
+                        <li>Market: ${{decimalFunction tcgplayer.prices.normal.market}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.normal.directLow}}
+                        <li>Direct Low: ${{decimalFunction tcgplayer.prices.normal.directLow}}</li>
+                    {{/if}}
+                </ul>
+                <br>
+            {{/if}}
+
+            {{#if tcgplayer.prices.holofoil}}
+                <p>Holofoil Prices:</p>
+                <ul>
+                    {{#if tcgplayer.prices.holofoil.low}}
+                        <li>Low: ${{decimalFunction tcgplayer.prices.holofoil.low}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.holofoil.mid}}
+                        <li>Mid: ${{decimalFunction tcgplayer.prices.holofoil.mid}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.holofoil.high}}
+                        <li>High: ${{decimalFunction tcgplayer.prices.holofoil.high}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.holofoil.market}}
+                        <li>Market: ${{decimalFunction tcgplayer.prices.holofoil.market}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.holofoil.directLow}}
+                        <li>Direct Low: ${{decimalFunction tcgplayer.prices.holofoil.directLow}}</li>
+                    {{/if}}
+                </ul>
+                <br>
+            {{/if}}
+
+            {{#if tcgplayer.prices.reverseHolofoil}}
+                <p>Reverse Holofoil Prices:</p>
+                <ul>
+                    {{#if tcgplayer.prices.reverseHolofoil.low}}
+                        <li>Low: ${{decimalFunction tcgplayer.prices.reverseHolofoil.low}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.reverseHolofoil.mid}}
+                        <li>Mid: ${{decimalFunction tcgplayer.prices.reverseHolofoil.mid}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.reverseHolofoil.high}}
+                        <li>High: ${{decimalFunction tcgplayer.prices.reverseHolofoil.high}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.reverseHolofoil.market}}
+                        <li>Market: ${{decimalFunction tcgplayer.prices.reverseHolofoil.market}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.reverseHolofoil.directLow}}
+                        <li>Direct Low: ${{decimalFunction tcgplayer.prices.reverseHolofoil.directLow}}</li>
+                    {{/if}}
+                </ul>
+                <br>
+            {{/if}}
+
+            {{#if tcgplayer.prices.1stEditionHolofoil}}
+                <p>1st Edition Holofoil Prices:</p>
+                <ul>
+                    {{#if tcgplayer.prices.1stEditionHolofoil.low}}
+                        <li>Low: ${{decimalFunction tcgplayer.prices.1stEditionHolofoil.low}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionHolofoil.mid}}
+                        <li>Mid: ${{decimalFunction tcgplayer.prices.1stEditionHolofoil.mid}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionHolofoil.high}}
+                        <li>High: ${{decimalFunction tcgplayer.prices.1stEditionHolofoil.high}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionHolofoil.market}}
+                        <li>Market: ${{decimalFunction tcgplayer.prices.1stEditionHolofoil.market}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionHolofoil.directLow}}
+                        <li>Direct Low: ${{decimalFunction tcgplayer.prices.1stEditionHolofoil.directLow}}</li>
+                    {{/if}}
+                </ul>
+                <br>
+            {{/if}}
+            {{#if tcgplayer.prices.1stEditionNormal}}
+                <p>1st Edition Normal Prices:</p>
+                <ul>
+                    {{#if tcgplayer.prices.1stEditionNormal.low}}
+                        <li>Low: ${{decimalFunction tcgplayer.prices.1stEditionNormal.low}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionNormal.mid}}
+                        <li>Mid: ${{decimalFunction tcgplayer.prices.1stEditionNormal.mid}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionNormal.high}}
+                        <li>High: ${{decimalFunction tcgplayer.prices.1stEditionNormal.high}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionNormal.market}}
+                        <li>Market: ${{decimalFunction tcgplayer.prices.1stEditionNormal.market}}</li>
+                    {{/if}}
+
+                    {{#if tcgplayer.prices.1stEditionNormal.directLow}}
+                        <li>Direct Low: ${{decimalFunction tcgplayer.prices.1stEditionNormal.directLow}}</li>
+                    {{/if}}
+                </ul>
+                <br>
+            {{/if}}
+        {{/if}}
+    </script>
+
+    <script src="../handlebars.min-v4.7.8.js"></script>
+    <script src="browse.js"></script>
+</html>

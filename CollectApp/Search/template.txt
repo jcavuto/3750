@@ -1,0 +1,75 @@
+<div class="card-details">
+    <h1>{{name}}</h1>
+    <p><strong>ID:</strong> {{id}}</p>
+    <p><strong>Supertype:</strong> {{supertype}}</p>
+    {{#if subtypes.length}}
+        <p><strong>Subtypes:</strong> {{subtypes.join(', ')}}</p>
+    {{/if}}
+    <p><strong>Level:</strong> {{level}}</p>
+    <p><strong>HP:</strong> {{hp}}</p>
+    {{#if ancientTrait}}
+        <p><strong>Ancient Trait:</strong> {{ancientTrait.name}} - {{ancientTrait.text}}</p>
+    {{/if}}
+    {{#if abilities.length}}
+        <h2>Abilities</h2>
+        {{#each abilities}}
+            <p><strong>{{name}}:</strong> {{text}}</p>
+        {{/each}}
+    {{/if}}
+    {{#if attacks.length}}
+        <h2>Attacks</h2>
+        {{#each attacks}}
+            <p><strong>{{name}}:</strong> {{text}} ({{cost.join(', ')}} - Damage: {{damage}}, Cost: {{convertedEnergyCost}})</p>
+        {{/each}}
+    {{/if}}
+    {{#if weaknesses.length}}
+        <h2>Weaknesses</h2>
+        {{#each weaknesses}}
+            <p><strong>Type:</strong> {{type}}, <strong>Value:</strong> {{value}}</p>
+        {{/each}}
+    {{/if}}
+    {{#if resistances.length}}
+        <h2>Resistances</h2>
+        {{#each resistances}}
+            <p><strong>Type:</strong> {{type}}, <strong>Value:</strong> {{value}}</p>
+        {{/each}}
+    {{/if}}
+    {{#if retreatCost.length}}
+        <p><strong>Retreat Cost:</strong> {{retreatCost.join(', ')}}</p>
+    {{/if}}
+    <p><strong>Set:</strong> {{set.name}} (Number: {{number}})</p>
+    <p><strong>Artist:</strong> {{artist}}</p>
+    <p><strong>Rarity:</strong> {{rarity}}</p>
+    <p><strong>Flavor Text:</strong> {{flavorText}}</p>
+    <p><strong>National Pokedex Numbers:</strong> {{nationalPokedexNumbers.join(', ')}}</p>
+    <h2>Legalities</h2>
+    <p><strong>Standard:</strong> {{legalities.standard}}</p>
+    <p><strong>Expanded:</strong> {{legalities.expanded}}</p>
+    <p><strong>Unlimited:</strong> {{legalities.unlimited}}</p>
+    {{#if regulationMark}}
+        <p><strong>Regulation Mark:</strong> {{regulationMark}}</p>
+    {{/if}}
+    {{#if images}}
+        <h2>Images</h2>
+        <img src="{{images.small}}" alt="Small Image">
+        <img src="{{images.large}}" alt="Large Image">
+    {{/if}}
+    {{#if tcgplayer}}
+        <h2>TCGPlayer Information</h2>
+        <p><strong>URL:</strong> {{tcgplayer.url}}</p>
+        <p><strong>Last Updated:</strong> {{tcgplayer.updatedAt}}</p>
+        <h3>Prices</h3>
+        {{#each tcgplayer.prices}}
+            <p><strong>{{@key}}:</strong> Low: {{low}}, Mid: {{mid}}, High: {{high}}, Market: {{market}}, Direct Low: {{directLow}}</p>
+        {{/each}}
+    {{/if}}
+    {{#if cardmarket}}
+        <h2>Cardmarket Information</h2>
+        <p><strong>URL:</strong> {{cardmarket.url}}</p>
+        <p><strong>Last Updated:</strong> {{cardmarket.updatedAt}}</p>
+        <h3>Prices</h3>
+        {{#each cardmarket.prices}}
+            <p><strong>{{@key}}:</strong> Average Sell Price: {{averageSellPrice}}, Low Price: {{lowPrice}}, Trend Price: {{trendPrice}}</p>
+        {{/each}}
+    {{/if}}
+</div>
