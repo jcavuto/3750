@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Car Selection</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <h1>Car Selection Page</h1>
+        <form id="form">
+            <fieldset>
+                <legend>Select Cars:</legend>
+                <label><input type="checkbox" name="cars[]" value="Tesla Model 3">Tesla Model 3</label><br>
+                <label><input type="checkbox" name="cars[]" value="Tesla Model Y">Tesla Model Y</label><br>
+                <label><input type="checkbox" name="cars[]" value="Tesla Model S">Tesla Model S</label><br>
+                <label><input type="checkbox" name="cars[]" value="Tesla Model X">Tesla Model X</label><br>
+                <label><input type="checkbox" name="cars[]" value="Nissan Murano">Nissan Murano</label><br>
+                <label><input type="checkbox" name="cars[]" value="Honda Civic">Honda Civic</label><br>
+                <label><input type="checkbox" name="cars[]" value="Subaru Crosstrek">Subaru Crosstrek</label><br>
+            </fieldset>
+            <input type="submit" value="Submit" onclick="submitForm(event)">
+        </form>
+
+        <div id="responseArea">
+            
+        </div>
+    </body>
+    <script src="js/selectionScript.js"></script>
+</html>
