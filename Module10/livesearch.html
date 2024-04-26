@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AJAX Live Search Example</title>
+    <script type="text/javascript" src="ajax.js"></script>
+
+    <style>
+        nav{
+            text-align: center;
+            display: block;
+            background-color: #333;
+            border-radius: 10px;
+            margin: auto;
+            width: 700px;
+            margin-top: 25px;
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: inline-block;
+        }
+        nav li{
+            float:left;
+        }
+
+        nav a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover{
+            background-color: #111;
+        }
+    </style>
+   </head>
+
+   <nav>
+        <ul>
+            <li><a class="home" href="../index.html">Home</a></li>
+            <li><a href="../Ellie.html">Ellie</a></li>
+            <li> <a href="../AboutMe.html">About Me</a></li>
+        </ul>
+    </nav>
+    
+   <body>
+     <h1>AJAX and PHP Excercise to search Capitols by State</h1>
+
+     <p><strong>Search for Capitols By State:</strong>
+     <input type="text" size="40" id="searchlive" oninput="inputFunction(event)"></p>
+
+     <div id="results">
+
+      <ul id="list">
+      <li>[Search results will display here.]</li>
+      </ul>
+
+     </div>
+     
+     <script type="text/javascript" src="search.js"></script>
+   </body>
+</html>
